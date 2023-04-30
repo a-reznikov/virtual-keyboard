@@ -19,6 +19,7 @@ body {
   margin: 0 auto;
   max-width: 1200px;
   align-items: center;
+  row-gap: 20px;
 }
 
 .textarea {
@@ -26,19 +27,43 @@ body {
   height: 200px;
 }
 
+.keyboard {
+  padding: 10px;
+  background: silver;
+}
 
 .keyboard__row {
   display: flex;
   justify-content: space-between;
   width: 800px;
   flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 10px;
 }
 
 .key {
-  width: 40px;
+  min-width: 40px;
   height: 40px;
-  background: gainsboro;
+  padding: 0 10px;
+  background: whitesmoke;
   cursor: pointer;
+  border-radius: 3px;
+}
+
+.ShiftLeft,
+.ShiftRight,
+.Enter {
+  flex-grow: 1;
+  min-width: 100px;
+}
+
+.ControlLeft,
+.ControlRight {
+  min-width: 70px;
+}
+
+.Space {
+  flex-grow: 1;
 }
 
 .key:hover {

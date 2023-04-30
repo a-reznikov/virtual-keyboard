@@ -477,13 +477,13 @@
     "shiftRu": ","
   },
   {
-    "key": "ArrowUp",
+    "key": "&#11165;",
     "code": "ArrowUp",
-    "caps": "ArrowUp",
-    "shift": "ArrowUp",
-    "keyRu": "ArrowUp",
-    "capsRu": "ArrowUp",
-    "shiftRu": "ArrowUp"
+    "caps": "&#11165;",
+    "shift": "&#11165;",
+    "keyRu": "&#11165;",
+    "capsRu": "&#11165;",
+    "shiftRu": "&#11165;"
   },
   {
     "key": "Shift",
@@ -540,31 +540,31 @@
     "shiftRu": "Alt"
   },
   {
-    "key": "ArrowLeft",
+    "key": "&#11164;",
     "code": "ArrowLeft",
-    "caps": "ArrowLeft",
-    "shift": "ArrowLeft",
-    "keyRu": "ArrowLeft",
-    "capsRu": "ArrowLeft",
-    "shiftRu": "ArrowLeft"
+    "caps": "&#11164;",
+    "shift": "&#11164;",
+    "keyRu": "&#11164;",
+    "capsRu": "&#11164;",
+    "shiftRu": "&#11164;"
   },
   {
-    "key": "ArrowDown",
+    "key": "&#11167;",
     "code": "ArrowDown",
-    "caps": "ArrowDown",
-    "shift": "ArrowDown",
-    "keyRu": "ArrowDown",
-    "capsRu": "ArrowDown",
-    "shiftRu": "ArrowDown"
+    "caps": "&#11167;",
+    "shift": "&#11167;",
+    "keyRu": "&#11167;",
+    "capsRu": "&#11167;",
+    "shiftRu": "&#11167;"
   },
   {
-    "key": "ArrowRight",
+    "key": "&#11166;",
     "code": "ArrowRight",
-    "caps": "ArrowRight",
-    "shift": "ArrowRight",
-    "keyRu": "ArrowRight",
-    "capsRu": "ArrowRight",
-    "shiftRu": "ArrowRight"
+    "caps": "&#11166;",
+    "shift": "&#11166;",
+    "keyRu": "&#11166;",
+    "capsRu": "&#11166;",
+    "shiftRu": "&#11166;"
   },
   {
     "key": "Ctrl",
