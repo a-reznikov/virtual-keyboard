@@ -1,4 +1,7 @@
+import { creatContainer } from './js/container';
 import { buttons } from './js/buttons';
 
-buttons('John');
-console.log('Start task');
+window.onload = function load() {
+  creatContainer();
+  buttons();
+};
