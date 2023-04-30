@@ -52,7 +52,8 @@ body {
   background: goldenrod;
 }
 
-.key-en {
+.key-en,
+.key-ru {
   display: flex;
   height: 100%;
   align-items: center;

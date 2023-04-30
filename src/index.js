@@ -2,6 +2,8 @@ import keys from './json/keys.json';
 import { creatContainer } from './js/container';
 import { Key } from './js/keys';
 
+let language = 'en';
+
 const changeCaps = () => {
   const caseLower = document.querySelectorAll('.case-lower');
   const capsKeys = document.querySelectorAll('.caps');
@@ -15,15 +17,56 @@ const changeCaps = () => {
   });
 };
 
+function writeFromKeyboard(symbol, code) {
+  const textArea = document.querySelector('.textarea');
+  const findKey = document.querySelector(`.${code}`);
+  const symbolRu = findKey.innerText;
+  if (language === 'en') {
+    textArea.textContent += symbol;
+  } else {
+    textArea.textContent += symbolRu;
+  }
+}
+
+const changeLang = () => {
+  const keyEn = document.querySelectorAll('.key-en');
+  const keyRu = document.querySelectorAll('.key-ru');
+  if (language === 'en') {
+    language = 'ru';
+    console.log('en - > ru', language);
+  } else {
+    language = 'en';
+    console.log('ru - > en', language);
+  }
+  keyEn.forEach((key) => {
+    key.classList.toggle('hidden');
+  });
+  keyRu.forEach((key) => {
+    key.classList.toggle('hidden');
+  });
+};
+
 document.addEventListener('keydown', (event) => {
   console.log(event);
-  const textArea = document.querySelector('.textarea');
   const activeKey = document.querySelector(`.${event.code}`);
-  if (event.code === 'CapsLock') {
+  activeKey.classList.add('active');
+  const symbol = event.key;
+  const symbolCode = event.code;
+  if (event.key === 'Alt') {
+    if (event.key === 'Alt' && (event.ctrlKey || event.metaKey)) {
+      changeLang();
+      console.log('change Lang');
+    }
+  } else if (event.key === 'Control') {
+    console.log('Control');
+    if (event.key === 'Control' && event.altKey) {
+      changeLang();
+      console.log('change Lang first Control');
+    }
+  } else if (event.code === 'CapsLock') {
     changeCaps();
   } else {
-    activeKey.classList.add('active');
-    textArea.textContent += event.key;
+    writeFromKeyboard(symbol, symbolCode);
   }
 });
 

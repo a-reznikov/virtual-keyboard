@@ -3,36 +3,72 @@
     "key": "`",
     "code": "Backquote",
     "caps": "`",
-    "shift": "~"
+    "shift": "~",
+    "keyRu": "`",
+    "capsRu": "`",
+    "shiftRu": "~"
   },
   {
     "key": "1",
     "code": "Digit1",
     "caps": "1",
-    "shift": "!"
+    "shift": "!",
+    "keyRu": "1",
+    "capsRu": "1",
+    "shiftRu": "!"
   },
   {
     "key": "2",
     "code": "Digit2",
     "caps": "2",
-    "shift": "@"
+    "shift": "@",
+    "keyRu": "2",
+    "capsRu": "2",
+    "shiftRu": "&quot;"
   },
   {
     "key": "3",
     "code": "Digit3",
     "caps": "3",
-    "shift": "#"
+    "shift": "#",
+    "keyRu": "3",
+    "capsRu": "3",
+    "shiftRu": "№"
   },
   {
     "key": "q",
     "code": "KeyQ",
     "caps": "Q",
-    "shift": "Q"
+    "shift": "Q",
+    "keyRu": "й",
+    "capsRu": "Й",
+    "shiftRu": "Й"
   },
   {
     "key": "CapsLock",
     "code": "CapsLock",
     "caps": "CapsLock",
-    "shift": "CapsLock"
+    "shift": "CapsLock",
+    "keyRu": "CapsLock",
+    "capsRu": "CapsLock",
+    "shiftRu": "CapsLock"
+  },
+  {
+    "key": "Control",
+    "code": "ControlLeft",
+    "caps": "Control",
+    "shift": "Control",
+    "keyRu": "Control",
+    "capsRu": "Control",
+    "shiftRu": "Control"
+  },
+  {
+    "key": "Alt",
+    "code": "AltLeft",
+    "caps": "Alt",
+    "shift": "Alt",
+    "keyRu": "Alt",
+    "capsRu": "Alt",
+    "shiftRu": "Alt"
   }
 ]
