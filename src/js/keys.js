@@ -10,7 +10,7 @@ export class Key {
 
   creatKey() {
     const key = document.createElement('div');
-    key.className = 'key';
+    key.className = `key ${this.code}`;
     const keyLangEn = document.createElement('div');
     keyLangEn.className = 'key-en';
     const caseLower = document.createElement('span');

@@ -9,6 +9,8 @@ html {
 body {
   background-color: yellowgreen;
   margin: 0;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-size: 2.0rem;
 }
 
 .container {
@@ -17,4 +19,46 @@ body {
   margin: 0 auto;
   max-width: 1200px;
   align-items: center;
+}
+
+.textarea {
+  width: 800px;
+  height: 200px;
+}
+
+
+.keyboard__row {
+  display: flex;
+  justify-content: space-between;
+  width: 800px;
+}
+
+.key {
+  width: 40px;
+  height: 40px;
+  background: gainsboro;
+  cursor: pointer;
+}
+
+.key:hover {
+  background: red;
+}
+
+.active {
+  background: red;
+}
+
+.pressed {
+  background: goldenrod;
+}
+
+.key-en {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
 }

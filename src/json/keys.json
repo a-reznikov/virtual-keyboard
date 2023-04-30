@@ -22,5 +22,17 @@
     "code": "Digit3",
     "caps": "3",
     "shift": "#"
+  },
+  {
+    "key": "q",
+    "code": "KeyQ",
+    "caps": "Q",
+    "shift": "Q"
+  },
+  {
+    "key": "CapsLock",
+    "code": "CapsLock",
+    "caps": "CapsLock",
+    "shift": "CapsLock"
   }
 ]
