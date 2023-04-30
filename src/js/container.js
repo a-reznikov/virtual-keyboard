@@ -12,6 +12,12 @@ export function creatContainer() {
   textContent.className = 'textarea';
   const keyboard = document.createElement('div');
   keyboard.className = 'keyboard';
+  for (let index = 0; index < 5;) {
+    const keyboardRow = document.createElement('div');
+    keyboardRow.className = `keyboard__row row-${index + 1}`;
+    index += 1;
+    keyboard.append(keyboardRow);
+  }
   const description = document.createElement('p');
   description.className = 'description';
   description.textContent = OS_WINDOWS;
