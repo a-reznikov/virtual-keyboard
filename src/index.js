@@ -17,15 +17,11 @@ const changeCaps = () => {
   });
 };
 
-function writeFromKeyboard(symbol, code) {
+function writeFromKeyboard(code) {
   const textArea = document.querySelector('.textarea');
   const findKey = document.querySelector(`.${code}`);
-  const symbolRu = findKey.innerText;
-  if (language === 'en') {
-    textArea.textContent += symbol;
-  } else {
-    textArea.textContent += symbolRu;
-  }
+  const symbol = findKey.innerText;
+  textArea.textContent += symbol;
 }
 
 const changeLang = () => {
@@ -50,7 +46,6 @@ document.addEventListener('keydown', (event) => {
   console.log(event);
   const activeKey = document.querySelector(`.${event.code}`);
   activeKey.classList.add('active');
-  const symbol = event.key;
   const symbolCode = event.code;
   if (event.key === 'Alt') {
     if (event.key === 'Alt' && (event.ctrlKey || event.metaKey)) {
@@ -66,7 +61,7 @@ document.addEventListener('keydown', (event) => {
   } else if (event.code === 'CapsLock') {
     changeCaps();
   } else {
-    writeFromKeyboard(symbol, symbolCode);
+    writeFromKeyboard(symbolCode);
   }
 });
 
