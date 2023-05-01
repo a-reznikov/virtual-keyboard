@@ -81,7 +81,10 @@ function concatText(start, text, symbol) {
 function writeFromKeyboard(code) {
   const textArea = document.querySelector('.textarea');
   const findKey = document.querySelector(`.${code}`);
-  const symbol = findKey.innerText;
+  let symbol = findKey.innerText;
+  if (code === 'Space') {
+    symbol = ' ';
+  }
   const start = positionCaret;
   textArea.value = concatText(start, textArea.value, symbol);
   textArea.setSelectionRange(positionCaret, positionCaret);
@@ -125,13 +128,26 @@ function writeBackspace() {
   const textArea = document.querySelector('.textarea');
   const text = textArea.value;
   const start = positionCaret;
-  console.log(positionCaret);
   if (positionCaret >= 1) {
     const first = text.slice(0, start - 1);
     const last = text.slice(start, text.length);
     const textInArea = first + last;
     textArea.value = textInArea;
     positionCaret -= 1;
+    textArea.setSelectionRange(positionCaret, positionCaret);
+  }
+}
+
+function writeDelete() {
+  const textArea = document.querySelector('.textarea');
+  const text = textArea.value;
+  const start = positionCaret;
+  console.log(positionCaret);
+  if (positionCaret <= text.length) {
+    const first = text.slice(0, start);
+    const last = text.slice(start + 1, text.length);
+    const textInArea = first + last;
+    textArea.value = textInArea;
     textArea.setSelectionRange(positionCaret, positionCaret);
   }
 }
@@ -166,7 +182,9 @@ document.addEventListener('keydown', (event) => {
     writeTab();
   } else if (event.code === 'Backspace') {
     writeBackspace();
-  } else {
+  } else if (event.code === 'Delete') {
+    writeDelete();
+  } else if (event.code !== 'MetaLeft') {
     writeFromKeyboard(symbolCode);
   }
 });
