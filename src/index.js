@@ -4,6 +4,7 @@ import { Key } from './js/keys';
 
 let language = 'en';
 let isCaps = false;
+let positionCaret = 0;
 
 const changeCaps = () => {
   const caseLower = document.querySelectorAll('.case-lower');
@@ -68,11 +69,22 @@ const disableShift = () => {
   });
 };
 
+function concatText(start, text, symbol) {
+  positionCaret += 1;
+  let first = text.slice(0, start);
+  const last = text.slice(start, text.length);
+  first += symbol;
+  const textInArea = first + last;
+  return textInArea;
+}
+
 function writeFromKeyboard(code) {
   const textArea = document.querySelector('.textarea');
   const findKey = document.querySelector(`.${code}`);
   const symbol = findKey.innerText;
-  textArea.textContent += symbol;
+  const start = positionCaret;
+  textArea.value = concatText(start, textArea.value, symbol);
+  textArea.setSelectionRange(positionCaret, positionCaret);
 }
 
 const changeLang = () => {
@@ -92,6 +104,14 @@ const changeLang = () => {
     key.classList.toggle('hidden');
   });
 };
+
+function writeEnter() {
+  const textArea = document.querySelector('.textarea');
+  const symbol = '\n';
+  const start = positionCaret;
+  textArea.value = concatText(start, textArea.value, symbol);
+  textArea.setSelectionRange(positionCaret, positionCaret);
+}
 
 document.addEventListener('keydown', (event) => {
   console.log(event);
@@ -117,6 +137,8 @@ document.addEventListener('keydown', (event) => {
   } else if (event.key === 'Shift') {
     console.log('enter shift');
     enableShift();
+  } else if (event.code === 'Enter') {
+    writeEnter();
   } else {
     writeFromKeyboard(symbolCode);
   }
@@ -134,12 +156,16 @@ document.addEventListener('keyup', (event) => {
 
 function writeFromScreen(symbol) {
   const textArea = document.querySelector('.textarea');
-  textArea.textContent += symbol;
+  textArea.value += symbol;
 }
 
 document.addEventListener('click', (event) => {
+  const textArea = document.querySelector('.textarea');
   const allKeys = document.querySelectorAll('.key');
   const symbol = event.target.innerText;
+  if (event.target === textArea) {
+    positionCaret = textArea.selectionStart;
+  }
   if (symbol === 'CapsLock') {
     changeCaps();
   } else {
