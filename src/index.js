@@ -201,7 +201,13 @@ document.addEventListener('keyup', (event) => {
 
 function writeFromScreen(symbol) {
   const textArea = document.querySelector('.textarea');
-  textArea.value += symbol;
+  let symbolScreen = symbol;
+  if (symbolScreen === '') {
+    symbolScreen = ' ';
+  }
+  const start = positionCaret;
+  textArea.value = concatText(start, textArea.value, symbolScreen);
+  textArea.setSelectionRange(positionCaret, positionCaret);
 }
 
 document.addEventListener('click', (event) => {
@@ -213,13 +219,39 @@ document.addEventListener('click', (event) => {
   }
   if (symbol === 'CapsLock') {
     changeCaps();
-  } else {
+  } else if (symbol === 'Enter') {
+    writeEnter();
+  } else if (symbol === 'Tab') {
+    writeTab();
+  } else if (symbol === 'Backspace') {
+    writeBackspace();
+  } else if (symbol === 'Delete') {
+    writeDelete();
+  } else if (symbol !== 'Ctrl' && symbol !== 'Win' && symbol !== 'Alt' && symbol !== 'Shift') {
     allKeys.forEach((key) => {
       if (key.contains(event.target)) {
         writeFromScreen(symbol);
         console.log(symbol);
       }
     });
+  }
+});
+
+document.addEventListener('mousedown', (event) => {
+  const symbol = event.target.innerText;
+  if (!isCaps && symbol === 'Shift') {
+    enableShift();
+  } else if (isCaps && symbol === 'Shift') {
+    enableCapsShift();
+  }
+});
+
+document.addEventListener('mouseup', (event) => {
+  const symbol = event.target.innerText;
+  if (!isCaps && symbol === 'Shift') {
+    disableShift();
+  } else if (isCaps && symbol === 'Shift') {
+    disableCapsShift();
   }
 });
 
