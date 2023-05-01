@@ -113,6 +113,29 @@ function writeEnter() {
   textArea.setSelectionRange(positionCaret, positionCaret);
 }
 
+function writeTab() {
+  const textArea = document.querySelector('.textarea');
+  const symbol = '\t';
+  const start = positionCaret;
+  textArea.value = concatText(start, textArea.value, symbol);
+  textArea.setSelectionRange(positionCaret, positionCaret);
+}
+
+function writeBackspace() {
+  const textArea = document.querySelector('.textarea');
+  const text = textArea.value;
+  const start = positionCaret;
+  console.log(positionCaret);
+  if (positionCaret >= 1) {
+    const first = text.slice(0, start - 1);
+    const last = text.slice(start, text.length);
+    const textInArea = first + last;
+    textArea.value = textInArea;
+    positionCaret -= 1;
+    textArea.setSelectionRange(positionCaret, positionCaret);
+  }
+}
+
 document.addEventListener('keydown', (event) => {
   console.log(event);
   event.preventDefault();
@@ -139,6 +162,10 @@ document.addEventListener('keydown', (event) => {
     enableShift();
   } else if (event.code === 'Enter') {
     writeEnter();
+  } else if (event.code === 'Tab') {
+    writeTab();
+  } else if (event.code === 'Backspace') {
+    writeBackspace();
   } else {
     writeFromKeyboard(symbolCode);
   }
