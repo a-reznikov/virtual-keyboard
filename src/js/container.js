@@ -1,7 +1,7 @@
 export function creatContainer() {
   const TITLE = 'Virtual keyboard';
   const OS_WINDOWS = 'Keyboard created in the Windows operating system';
-  const LANGUAGE = 'To switch the language combination: left ctrl + alt';
+  const LANGUAGE = 'To switch the language combination: Ctrl + Alt';
   const body = document.querySelector('body');
   const container = document.createElement('main');
   container.className = 'container';

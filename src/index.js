@@ -12,23 +12,36 @@ const changeCaps = () => {
   const capsKey = document.querySelector('.CapsLock');
   capsKey.classList.toggle('pressed');
   if (!isCaps) {
+    caseLower.forEach((key) => {
+      key.classList.add('hidden');
+    });
+    caps.forEach((key) => {
+      key.classList.remove('hidden');
+    });
     isCaps = true;
   } else {
+    caseLower.forEach((key) => {
+      key.classList.remove('hidden');
+    });
+    caps.forEach((key) => {
+      key.classList.add('hidden');
+    });
     isCaps = false;
   }
-  console.log(isCaps);
-  caseLower.forEach((key) => {
-    key.classList.toggle('hidden');
-  });
-  caps.forEach((key) => {
-    key.classList.toggle('hidden');
-  });
 };
 
 const enableCapsShift = () => {
+  const caseLower = document.querySelectorAll('.case-lower');
   const caps = document.querySelectorAll('.caps');
+  const shift = document.querySelectorAll('.shift');
   const capsShift = document.querySelectorAll('.caps-shift');
+  caseLower.forEach((key) => {
+    key.classList.add('hidden');
+  });
   caps.forEach((key) => {
+    key.classList.add('hidden');
+  });
+  shift.forEach((key) => {
     key.classList.add('hidden');
   });
   capsShift.forEach((key) => {
@@ -95,10 +108,8 @@ const changeLang = () => {
   const keyRu = document.querySelectorAll('.key-ru');
   if (language === 'en') {
     language = 'ru';
-    console.log('en - > ru', language);
   } else {
     language = 'en';
-    console.log('ru - > en', language);
   }
   keyEn.forEach((key) => {
     key.classList.toggle('hidden');
@@ -142,7 +153,6 @@ function writeDelete() {
   const textArea = document.querySelector('.textarea');
   const text = textArea.value;
   const start = positionCaret;
-  console.log(positionCaret);
   if (positionCaret <= text.length) {
     const first = text.slice(0, start);
     const last = text.slice(start + 1, text.length);
@@ -153,7 +163,8 @@ function writeDelete() {
 }
 
 document.addEventListener('keydown', (event) => {
-  console.log(event);
+  const textArea = document.querySelector('.textarea');
+  textArea.focus();
   event.preventDefault();
   const activeKey = document.querySelector(`.${event.code}`);
   activeKey.classList.add('active');
@@ -161,20 +172,25 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Alt') {
     if (event.key === 'Alt' && event.ctrlKey) {
       changeLang();
-      console.log('change Lang');
     }
   } else if (event.key === 'Control') {
-    console.log('Control');
     if (event.key === 'Control' && event.altKey) {
       changeLang();
-      console.log('change Lang first Control');
     }
-  } else if (event.code === 'CapsLock') {
+  } else if (!isCaps && event.code === 'CapsLock' && event.shiftKey) {
+    isCaps = false;
+    changeCaps();
+    enableCapsShift();
+  } else if (isCaps && event.code === 'CapsLock' && event.shiftKey) {
+    isCaps = true;
+    disableCapsShift();
+    changeCaps();
+    enableShift();
+  } else if (event.code === 'CapsLock' && !event.shiftKey) {
     changeCaps();
   } else if (isCaps && event.key === 'Shift') {
     enableCapsShift();
   } else if (event.key === 'Shift') {
-    console.log('enter shift');
     enableShift();
   } else if (event.code === 'Enter') {
     writeEnter();
@@ -184,12 +200,14 @@ document.addEventListener('keydown', (event) => {
     writeBackspace();
   } else if (event.code === 'Delete') {
     writeDelete();
-  } else if (event.code !== 'MetaLeft') {
+  } else if (event.code !== 'MetaLeft' && event.code !== 'CapsLock') {
     writeFromKeyboard(symbolCode);
   }
 });
 
 document.addEventListener('keyup', (event) => {
+  const textArea = document.querySelector('.textarea');
+  textArea.focus();
   const activeKey = document.querySelector(`.${event.code}`);
   activeKey.classList.remove('active');
   if (!isCaps && event.key === 'Shift') {
@@ -210,15 +228,39 @@ function writeFromScreen(symbol) {
   textArea.setSelectionRange(positionCaret, positionCaret);
 }
 
-document.addEventListener('click', (event) => {
+document.addEventListener('mousedown', (event) => {
+  const symbol = event.target.innerText;
+  if (!isCaps && symbol === 'CapsLock' && event.shiftKey) {
+    changeCaps();
+    enableCapsShift();
+  } else if (isCaps && symbol === 'CapsLock' && event.shiftKey) {
+    disableCapsShift();
+    changeCaps();
+    enableShift();
+  } else if (!isCaps && symbol === 'Shift') {
+    enableShift();
+  } else if (isCaps && symbol === 'Shift') {
+    enableCapsShift();
+  }
+});
+
+document.addEventListener('mouseup', (event) => {
   const textArea = document.querySelector('.textarea');
+  textArea.focus();
   const allKeys = document.querySelectorAll('.key');
   const symbol = event.target.innerText;
-  console.log(symbol);
   if (event.target === textArea) {
     positionCaret = textArea.selectionStart;
   }
-  if (symbol === 'CapsLock') {
+  if (isCaps && symbol === 'CapsLock' && event.shiftKey) {
+    disableCapsShift();
+  } else if (!isCaps && symbol === 'CapsLock' && event.shiftKey) {
+    disableShift();
+  } else if (!isCaps && symbol === 'Shift') {
+    disableShift();
+  } else if (isCaps && symbol === 'Shift') {
+    disableCapsShift();
+  } else if (symbol === 'CapsLock') {
     changeCaps();
   } else if (symbol === 'Enter') {
     writeEnter();
@@ -236,27 +278,8 @@ document.addEventListener('click', (event) => {
     allKeys.forEach((key) => {
       if (key.contains(event.target)) {
         writeFromScreen(symbol);
-        console.log(symbol);
       }
     });
-  }
-});
-
-document.addEventListener('mousedown', (event) => {
-  const symbol = event.target.innerText;
-  if (!isCaps && symbol === 'Shift') {
-    enableShift();
-  } else if (isCaps && symbol === 'Shift') {
-    enableCapsShift();
-  }
-});
-
-document.addEventListener('mouseup', (event) => {
-  const symbol = event.target.innerText;
-  if (!isCaps && symbol === 'Shift') {
-    disableShift();
-  } else if (isCaps && symbol === 'Shift') {
-    disableCapsShift();
   }
 });
 
