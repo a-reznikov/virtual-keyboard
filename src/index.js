@@ -281,3 +281,18 @@ window.onload = function load() {
   creatContainer();
   creatKeys();
 };
+
+function getLocalStorage() {
+  if (localStorage.getItem('lang')) {
+    const lang = localStorage.getItem('lang');
+    if (lang === 'ru') {
+      changeLang();
+    }
+  }
+}
+window.addEventListener('load', getLocalStorage);
+
+function setLocalStorage() {
+  localStorage.setItem('lang', language);
+}
+window.addEventListener('beforeunload', setLocalStorage);
