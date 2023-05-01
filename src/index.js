@@ -159,7 +159,7 @@ document.addEventListener('keydown', (event) => {
   activeKey.classList.add('active');
   const symbolCode = event.code;
   if (event.key === 'Alt') {
-    if (event.key === 'Alt' && (event.ctrlKey || event.metaKey)) {
+    if (event.key === 'Alt' && event.ctrlKey) {
       changeLang();
       console.log('change Lang');
     }
@@ -214,6 +214,7 @@ document.addEventListener('click', (event) => {
   const textArea = document.querySelector('.textarea');
   const allKeys = document.querySelectorAll('.key');
   const symbol = event.target.innerText;
+  console.log(symbol);
   if (event.target === textArea) {
     positionCaret = textArea.selectionStart;
   }
@@ -227,6 +228,10 @@ document.addEventListener('click', (event) => {
     writeBackspace();
   } else if (symbol === 'Delete') {
     writeDelete();
+  } else if (symbol === 'Alt' && event.ctrlKey) {
+    changeLang();
+  } else if (symbol === 'Ctrl' && event.altKey) {
+    changeLang();
   } else if (symbol !== 'Ctrl' && symbol !== 'Win' && symbol !== 'Alt' && symbol !== 'Shift') {
     allKeys.forEach((key) => {
       if (key.contains(event.target)) {
