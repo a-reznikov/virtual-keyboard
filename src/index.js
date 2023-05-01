@@ -5,6 +5,7 @@ import { Key } from './js/keys';
 let language = 'en';
 let isCaps = false;
 let positionCaret = 0;
+let isHoldCaps = false;
 
 const changeCaps = () => {
   const caseLower = document.querySelectorAll('.case-lower');
@@ -177,16 +178,19 @@ document.addEventListener('keydown', (event) => {
     if (event.key === 'Control' && event.altKey) {
       changeLang();
     }
-  } else if (!isCaps && event.code === 'CapsLock' && event.shiftKey) {
+  } else if (!isCaps && event.code === 'CapsLock' && event.shiftKey && !isHoldCaps) {
     isCaps = false;
+    isHoldCaps = true;
     changeCaps();
     enableCapsShift();
-  } else if (isCaps && event.code === 'CapsLock' && event.shiftKey) {
+  } else if (isCaps && event.code === 'CapsLock' && event.shiftKey && !isHoldCaps) {
     isCaps = true;
+    isHoldCaps = true;
     disableCapsShift();
     changeCaps();
     enableShift();
-  } else if (event.code === 'CapsLock' && !event.shiftKey) {
+  } else if (event.code === 'CapsLock' && !event.shiftKey && !isHoldCaps) {
+    isHoldCaps = true;
     changeCaps();
   } else if (isCaps && event.key === 'Shift') {
     enableCapsShift();
@@ -210,6 +214,9 @@ document.addEventListener('keyup', (event) => {
   textArea.focus();
   const activeKey = document.querySelector(`.${event.code}`);
   activeKey.classList.remove('active');
+  if (event.code === 'CapsLock') {
+    isHoldCaps = false;
+  }
   if (!isCaps && event.key === 'Shift') {
     disableShift();
   } else if (isCaps && event.key === 'Shift') {
