@@ -7,10 +7,19 @@ html {
 }
 
 body {
-  background-color: yellowgreen;
+  background: #F6F6F6;
   margin: 0;
   font-family: 'Trebuchet MS', Arial, sans-serif;
-  font-size: 2.0rem;
+  color: #545454;
+  font-size: 1.8rem;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+P {
+  margin: 0;
 }
 
 .container {
@@ -24,12 +33,19 @@ body {
 
 .textarea {
   width: 800px;
-  height: 200px;
+  height: 140px;
+  color: #545454;
+  font-size: 1.6rem;
+  border: 3px solid silver;
+  border-radius: 10px;
 }
 
 .keyboard {
   padding: 10px;
   background: silver;
+  border: 4px solid white;
+  border-radius: 10px;
+  box-shadow: 0px 2px 11px 7px rgba(13, 13, 13, 0.4);
 }
 
 .keyboard__row {
@@ -45,9 +61,12 @@ body {
   min-width: 40px;
   height: 40px;
   padding: 0 10px;
+  color: #545454;
   background: whitesmoke;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: 5px;
+  border: 2px solid gray;
+  transition: all 0.2s ease-in-out;
 }
 
 .ShiftLeft,
@@ -67,15 +86,31 @@ body {
 }
 
 .key:hover {
-  background: red;
+  color: #545454;
+  background: white;
+  border: 2px solid gray;
+  box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.6);
 }
 
-.active {
-  background: red;
+.key:active {
+  color: whitesmoke;
+  background: rgb(100, 100, 100);
+  border: 2px solid whitesmoke;
+  box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.6);
+}
+
+.key.active {
+  color: whitesmoke;
+  background: rgb(100, 100, 100);
+  border: 2px solid whitesmoke;
+  box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.6);
 }
 
 .pressed {
-  background: goldenrod;
+  color: whitesmoke;
+  background: rgb(100, 100, 100);
+  border: 2px solid whitesmoke;
+  box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.6);
 }
 
 .key-en,
